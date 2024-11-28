@@ -101,6 +101,7 @@ const weapons = [
     }
 ];
 
+// Assegnamo l'arma
 function assignWeaponsToFighters(fighters, weapons) {
     //Copiamo l'array originale per non modificarlo direttamente. 
     const availableWeapons = [...weapons];
@@ -128,9 +129,10 @@ function assignWeaponsToFighters(fighters, weapons) {
 // Assegnamo l'arma a una costante
 const fightersWithWeapons = assignWeaponsToFighters(fighters, weapons);
 
-// Console log ordinato
 fightersWithWeapons.forEach(elem => {
-    console.log('Il fighter', elem.name)
-    console.log("Ha ricevuto l'arma", elem.weapon.name);
-    console.log('')
+    console.log(`%cIl fighter%c ${elem.name}`, "", "font-weight: bold; color: red;");
+    console.log(`%cHa ricevuto l'arma%c ${elem.weapon.name}`, "", "font-weight: bold; color: orange;");
+    console.log(`%c${elem.name}%c ha una potenza di %c${elem.power}`, "font-weight: bold; color: red;", "", "font-weight: bold; color: green;");
+    console.log(`%c${elem.weapon.name}%c ha una potenza di %c${elem.weapon.power}`, "font-weight: bold; color:orange;", "", "font-weight: bold; color: purple;");
+    console.log('');
 });
