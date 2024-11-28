@@ -189,6 +189,29 @@ function finalFighters(arr) {
 const battleFighters = finalFighters(qualifiedFighters);
 console.log('');
 
+function battle(arr) {
+    let fighters = [...arr]; // Create a copy to avoid modifying the original array
 
+    while (fighters.length > 1) {
+        const prev = fighters[0]; // First fighter
+        const curr = fighters[1]; // Second fighter
+        
+        // Compare powers
+        if (prev.power >= curr.power) {
+            console.log(`%c${prev.name} %cbatte %c${curr.name}`, 
+                "font-weight: bold; color: red;","", "font-weight: bold; color: red;");
+            console.log();
+            
+            fighters.splice(1, 1); // Remove the second fighter
+        } else {
+            console.log(`%c${curr.name} %cbatte %c${prev.name}`, "font-weight: bold; color: red;","", "font-weight: bold; color: red;");
+            fighters.splice(0, 1); // Remove the first fighter
+        }
+    }
+
+    return fighters[0]; // The last remaining fighter (winner)
+}
+
+console.log(battle(battleFighters));
 
 
