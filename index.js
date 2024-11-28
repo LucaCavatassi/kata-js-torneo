@@ -153,5 +153,34 @@ fightersWithWeapons.forEach(elem => {
 });
 
 // Qualificazione 
-const qualifiedFighters = fightersWithWeapons.filter((elem) => elem.power > 2000);
-console.log(qualifiedFighters);
+const qualifiedFighters = fightersWithWeapons.filter((elem) => {
+    if (elem.power <= 2000) {
+        console.log(`%cIl combattente %c${elem.name} %cviene %celiminato %cla sua potenza era minore di 2000!`,
+            "", "font-weight: bold; color: red;", "", "color:red;", ""
+        );
+        return false; // Exclude this fighter from the qualified list
+    }
+    return true; // Include this fighter in the qualified list
+});
+console.log('');
+
+// Combattimento
+function fighting(arr) {
+    // Controllo se l'array è dispari
+    if (arr.length % 2 !== 0) {
+        console.log('I combattenti sono dispari, aggiungo un combattente al torneo!');
+        
+        const fighterRobot = {name: 'Robot', power: 4000};
+        console.log();
+        
+        // Ritorno un nuovo array con il robot che rende pari
+        return [...arr, fighterRobot]
+    }
+
+    console.log('I combattenti sono pari, si può procedere al combattimento!');
+    return arr
+}
+
+const battleFighters = fighting(qualifiedFighters);
+
+
