@@ -116,4 +116,8 @@ function assignWeaponsToFighters(fighters, weapons) {
 // Assegnamo l'arma a una costante
 const fightersWithWeapons = assignWeaponsToFighters(fighters, weapons);
 
-console.log(fightersWithWeapons);
+fightersWithWeapons.forEach(elem => {
+    console.log('Il fighter', elem.name)
+    console.log("Ha ricevuto l'arma", elem.weapon.name);
+    console.log('')
+});
