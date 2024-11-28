@@ -1,4 +1,4 @@
-
+// Combattenti
 const fighters = [
     {
         name: 'Freezer',
@@ -49,7 +49,7 @@ const fighters = [
         power: 1250
     }
 ];
-
+// Armi
 const weapons = [
     { 
         name: "Ventaglio della Musa", 
@@ -101,21 +101,34 @@ const weapons = [
     }
 ];
 
-
 function assignWeaponsToFighters(fighters, weapons) {
+    //Copiamo l'array originale per non modificarlo direttamente. 
+    const availableWeapons = [...weapons];
+
     return fighters.map(fighter => {
-        // Math.random() * weapons.length crea un numero random nel range dell'array
-        // Math.floor lo converte in intero
-        // weapons[Numero Random] = arma random nell'array weapons
-        const randomWeapon = weapons[Math.floor(Math.random() * weapons.length)];
-        // Ritorna un array di oggetti, con tutti fighters assegnati grazie allo spread operator e un arma random generata precedentemente
-        return { ...fighter, weapon: randomWeapon };
+        // Ci assicuriamo ci siano ancora armi.
+        if (availableWeapons.length === 0) {
+            console.warn("Le armi non bastano per tutti!");
+        }
+        // Generiamo un index random, con Math.Random * la lunghezza dell'array delle armi.
+        // Math.floor lo trasforma in intero.
+        const randomIndex = Math.floor(Math.random() * availableWeapons.length);
+        
+        // Splice,1 rimuove a quell'indice dato un 1 elemento restituendo un nuovo array anche se c'è un solo elemento.
+        // Con la distrutturazione assegno alla variabile assignedWeapon questa arma.
+        const [assignedWeapon] = availableWeapons.splice(randomIndex, 1);
+        
+        // Essendo che map cicla ogni elemento.
+        // Assegno ad ogni fighter l'arma salvata nella costante assignedWeapon.
+        // Che è stata gia rimossa dall'array di armi disponibili.
+        return { ...fighter, weapon: assignedWeapon };
     });
 }
 
 // Assegnamo l'arma a una costante
 const fightersWithWeapons = assignWeaponsToFighters(fighters, weapons);
 
+// Console log ordinato
 fightersWithWeapons.forEach(elem => {
     console.log('Il fighter', elem.name)
     console.log("Ha ricevuto l'arma", elem.weapon.name);
