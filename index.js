@@ -200,16 +200,36 @@ function battle(arr) {
         if (prev.power >= curr.power) {
             console.log(`%c${prev.name} %cbatte %c${curr.name}`, 
                 "font-weight: bold; color: red;","", "font-weight: bold; color: red;");
-            console.log();
+            console.log(`%cCon una potenza di %c${prev.power} %ccontro %c${curr.power}%c!`, 
+                "", "font-weight:bold; color: green", "", "font-weight:bold; color: green","");
             
             fighters.splice(1, 1); // Remove the second fighter
         } else {
             console.log(`%c${curr.name} %cbatte %c${prev.name}`, "font-weight: bold; color: red;","", "font-weight: bold; color: red;");
+            console.log(`%cCon una potenza di %c${curr.power} %ccontro %c${prev.power}%c!`, 
+                "", "font-weight:bold; color: green", "", "font-weight:bold; color: green","");
             fighters.splice(0, 1); // Remove the first fighter
         }
     }
 
-    return fighters[0]; // The last remaining fighter (winner)
+    console.log('');
+    
+    // Top fighters (winner included)
+    const topFighters = [...arr].sort((a, b) => b.power - a.power).slice(0, 3);
+
+    // Log the top three fighters
+    topFighters.forEach((fighter, index) => {
+        const colors = ["gold", "#AAAAAA", "#AA5500"]; // Colors for first, second, third place
+        console.log(
+            `%c${fighter.name}, %csi posiziona al ${index + 1}° posto con una potenza di ${fighter.power}!`,
+            `font-weight: bold; color: ${colors[index]};`,
+            ""
+        );
+    });
+
+    console.log('');
+    
+    return console.log(`%c${fighters[0].name} %cvince!`, "font-weight:bold; color: red", "");
 }
 
 console.log(battle(battleFighters));
