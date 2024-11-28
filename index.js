@@ -190,25 +190,31 @@ const battleFighters = finalFighters(qualifiedFighters);
 console.log('');
 
 function battle(arr) {
-    let fighters = [...arr]; // Create a copy to avoid modifying the original array
+    // Creo copia dell'array
+    let fighters = [...arr]; 
 
+    // Finché l'array è lungo almeno 1 quindi ha due elementi 0 e 1
     while (fighters.length > 1) {
-        const prev = fighters[0]; // First fighter
-        const curr = fighters[1]; // Second fighter
+        // Assegno il primo combattente
+        const prev = fighters[0];
+        // Assegno il secondo combattente
+        const curr = fighters[1]; 
         
-        // Compare powers
+        // Comparo la forza se il primo che gioca in casa è maggiore o uguale al secondo vince lui e l'altro viene rimosso
         if (prev.power >= curr.power) {
+            // Loggo il risultato
             console.log(`%c${prev.name} %cbatte %c${curr.name}`, 
                 "font-weight: bold; color: red;","", "font-weight: bold; color: red;");
             console.log(`%cCon una potenza di %c${prev.power} %ccontro %c${curr.power}%c!`, 
                 "", "font-weight:bold; color: green", "", "font-weight:bold; color: green","");
             
-            fighters.splice(1, 1); // Remove the second fighter
+            fighters.splice(1, 1);
         } else {
-            console.log(`%c${curr.name} %cbatte %c${prev.name}`, "font-weight: bold; color: red;","", "font-weight: bold; color: red;");
-            console.log(`%cCon una potenza di %c${curr.power} %ccontro %c${prev.power}%c!`, 
+            // Faccio l'opposto dell'if
+            console.log(`%c${prev.name} %cviene battuto da %c${curr.name}`, "font-weight: bold; color: red;","", "font-weight: bold; color: red;");
+            console.log(`%cLa potenza di %c${prev.power} %ccontro %c${curr.power}%c non è abbastanza!`, 
                 "", "font-weight:bold; color: green", "", "font-weight:bold; color: green","");
-            fighters.splice(0, 1); // Remove the first fighter
+            fighters.splice(0, 1);
         }
     }
 
@@ -221,15 +227,20 @@ function battle(arr) {
     topFighters.forEach((fighter, index) => {
         const colors = ["gold", "#AAAAAA", "#AA5500"]; // Colors for first, second, third place
         console.log(
-            `%c${fighter.name}, %csi posiziona al ${index + 1}° posto con una potenza di ${fighter.power}!`,
+            `%c${fighter.name}, %csi posiziona al %c${index + 1}° posto %ccon una potenza di %c${fighter.power}%c!`,
             `font-weight: bold; color: ${colors[index]};`,
+            "",
+            `font-weight: bold; color: ${colors[index]};`,
+            "",
+            "font-weight: bold; color: green;",
             ""
         );
     });
 
     console.log('');
-    
-    return console.log(`%c${fighters[0].name} %cvince!`, "font-weight:bold; color: red", "");
+    const winner = fighters[0];
+    console.log(`%c${winner.name} %cvince!`, "font-weight:bold; color: red", "");
+    return winner
 }
 
 console.log(battle(battleFighters));
