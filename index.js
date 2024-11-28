@@ -48,9 +48,9 @@ const fighters = [
         name: 'Trunks',
         power: 1250
     }
-  ];
-  
-  const weapons = [
+];
+
+const weapons = [
     { 
         name: "Ventaglio della Musa", 
         power: 15 
@@ -99,4 +99,21 @@ const fighters = [
         name: "Orecchini Potara", 
         power: 250 
     }
-  ];
+];
+
+
+function assignWeaponsToFighters(fighters, weapons) {
+    return fighters.map(fighter => {
+        // Math.random() * weapons.length crea un numero random nel range dell'array
+        // Math.floor lo converte in intero
+        // weapons[Numero Random] = arma random nell'array weapons
+        const randomWeapon = weapons[Math.floor(Math.random() * weapons.length)];
+        // Ritorna un array di oggetti, con tutti fighters assegnati grazie allo spread operator e un arma random generata precedentemente
+        return { ...fighter, weapon: randomWeapon };
+    });
+}
+
+// Assegnamo l'arma a una costante
+const fightersWithWeapons = assignWeaponsToFighters(fighters, weapons);
+
+console.log(fightersWithWeapons);
